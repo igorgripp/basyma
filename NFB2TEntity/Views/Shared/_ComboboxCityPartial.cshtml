@@ -1,0 +1,13 @@
+﻿@model NFB2TEntity.tblCidade
+
+@*<select id="codCidade" class="selectpicker" name="Cities">
+    <option value="">Selecione a Cidade</option>
+    @foreach (var City in @Model.getAllCities())
+    {
+        <option value="@City.codCidade">@City.noCidade</option>
+    }
+</select>*@
+<div class="col-sm-4">
+    @Html.DropDownList("codCidade", new SelectList(ViewBag.Cities, "codCidade", "noCidade"), "Selecione a Cidade", new { @class = "selectpicker", id = "codCidade" })
+</div>
+

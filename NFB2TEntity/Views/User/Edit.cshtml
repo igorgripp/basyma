@@ -1,0 +1,69 @@
+﻿@model NFB2TEntity.Usuario
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Usuario</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.codUsuario)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.codUsuario)
+            @Html.ValidationMessageFor(model => model.codUsuario)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dcNome)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.dcNome)
+            @Html.ValidationMessageFor(model => model.dcNome)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dcLogin)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.dcLogin)
+            @Html.ValidationMessageFor(model => model.dcLogin)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dcSenha)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.dcSenha)
+            @Html.ValidationMessageFor(model => model.dcSenha)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dcEmail)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.dcEmail)
+            @Html.ValidationMessageFor(model => model.dcEmail)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

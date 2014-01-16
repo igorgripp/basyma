@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="622529ae2fdc451fa7ba871237bae311" Name="Diagram1">
+        <EntityTypeShape EntityType="dbNF_B2TModel.tblCidade" Width="1.5" PointX="6.5873739098139916" PointY="24.613008346694059" />
+        <EntityTypeShape EntityType="dbNF_B2TModel.tblCliente" Width="1.5" PointX="2.652778282134225" PointY="5.7366250780115955" />
+        <EntityTypeShape EntityType="dbNF_B2TModel.tblDescricaoNota" Width="1.5" PointX="10.075226129067701" PointY="19.013100230606785" />
+        <EntityTypeShape EntityType="dbNF_B2TModel.tblInformacaoBancaria" Width="1.5" PointX="3.0474079507623841" PointY="16.489971108962767" />
+        <EntityTypeShape EntityType="dbNF_B2TModel.tblNotaFiscal" Width="1.5" PointX="0.12091201549438388" PointY="22.43804199548347" />
+        <EntityTypeShape EntityType="dbNF_B2TModel.tblNotaFiscal_Retencao" Width="1.5" PointX="10.385961278521439" PointY="27.320008722748611" />
+        <EntityTypeShape EntityType="dbNF_B2TModel.tblRetencao" Width="1.5" PointX="1.904939633749863" PointY="4.3590133955511323" />
+        <EntityTypeShape EntityType="dbNF_B2TModel.tblTipoNota" Width="1.5" PointX="10.784472260058145" PointY="21.064583072934571" />
+        <EntityTypeShape EntityType="dbNF_B2TModel.tblUF" Width="1.5" PointX="2.8374140238563594" PointY="14.345889083270864" />
+        <EntityTypeShape EntityType="dbNF_B2TModel.tblUsuario" Width="1.5" PointX="1.5639261219482523" PointY="23.958427082727862" />
+        <AssociationConnector Association="dbNF_B2TModel.fk_cidade_cliente" />
+        <AssociationConnector Association="dbNF_B2TModel.fk_uf_cidade" />
+        <AssociationConnector Association="dbNF_B2TModel.fk_cliente_notafiscal" />
+        <AssociationConnector Association="dbNF_B2TModel.fk_notafiscal_descricaonota" />
+        <AssociationConnector Association="dbNF_B2TModel.fk_informacaobancaria_notafiscal" />
+        <AssociationConnector Association="dbNF_B2TModel.fk_notafiscal_notafiscal_retencao" />
+        <AssociationConnector Association="dbNF_B2TModel.fk_tipoconta_notafiscal" />
+        <AssociationConnector Association="dbNF_B2TModel.fk_usuario_notafiscal" />
+        <AssociationConnector Association="dbNF_B2TModel.fk_retencao_notafiscal_retencao" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

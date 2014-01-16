@@ -1,0 +1,51 @@
+﻿@model NFB2TEntity.Usuario
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Usuario</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.codUsuario)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.codUsuario)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.dcNome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.dcNome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.dcLogin)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.dcLogin)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.dcSenha)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.dcSenha)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.dcEmail)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.dcEmail)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

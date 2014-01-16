@@ -1,0 +1,133 @@
+﻿@model NFB2TEntity.Models.ClientModel
+@{
+    ViewBag.Title = "Editando Cliente";
+    Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <h3>. Edição <small>(cliente)</small></h3>
+    <br />
+    <br />
+    @Html.HiddenFor(u => u.codCliente);
+    <div class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="dcDestinatario" class="col-sm-2 control-label">Destinatário</label>
+            <div class="col-sm-7">
+                @Html.TextBoxFor(u => u.dcDestinatario, new { @class = "form-control", placeholder = "Destinatário" })
+            </div>
+            <div class="col-sm-3">
+                <button type="button" disabled class="btn btn-danger">@Html.ValidationMessageFor(u => u.dcDestinatario)</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-4">
+                @Html.TextBoxFor(u => u.nuCNPJ, new { @class = "form-control", placeholder = "CNPJ" })
+                @Html.TextBoxFor(u => u.nuCPF, new { @class = "form-control", placeholder = "CPF", style = "display: none" })
+            </div>
+            <div class="col-sm-4 ">
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary active" id="CNPJLabel" name="radioCNPJCPF">
+                        <input type="radio" id="CNPJ" name="CNPJ" checked>
+                        CNPJ
+                    </label>
+                    <label class="btn btn-primary" id="CPFLabel" name="radioCNPJCPF">
+                        <input type="radio" id="CPF" name="CPF">
+                        CPF
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="nuCadastroFiscal" class="col-sm-2 control-label">Cadastro Fiscal</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(u => u.nuCadastroFiscal, new { @class = "form-control", placeholder = "Cadastro Fiscal" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="nuTelefone" class="col-sm-2 control-label">Telefone</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(u => u.nuTelefone, new { @class = "form-control", placeholder = "Telefone" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            @Html.Partial("_ComboboxStatePartial", ViewData["State"])
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            @Html.Partial("_ComboboxCityPartial", ViewData["City"])
+            <div class="col-sm-3">
+                <button type="button" disabled class="btn btn-danger">@Html.ValidationMessageFor(u => u.codCidade)</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="nuCEP" class="col-sm-2 control-label">CEP</label>
+            <div class="col-sm-2">
+                @Html.TextBoxFor(u => u.nuCEP, new { @class = "form-control", placeholder = "CEP" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="dcEndereco" class="col-sm-2 control-label">Endereço</label>
+            <div class="col-sm-7">
+                @Html.TextBoxFor(u => u.dcEndereco, new { @class = "form-control", placeholder = "Endereço" })
+            </div>
+            <div class="col-sm-3">
+                <button type="button" disabled class="btn btn-danger">@Html.ValidationMessageFor(u => u.dcEndereco)</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Salvar</button>
+            </div>
+        </div>
+    </div>
+    
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-select-states-cities.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            $('select').selectpicker();
+
+            $("#nuCNPJ").mask("99.999.999/9999-99");
+            $("#nuCPF").mask("999.999.999-99");
+            $("#nuCadastroFiscal").mask("99.999.999/999-99");
+            $("#nuCEP").mask("99999-999");
+            $("#nuTelefone").mask("(99)9999-9999");
+
+            $('[name=radioCNPJCPF]').click(function () {
+                idInputClicked = $(this).children('input').attr('id');
+
+                if (idInputClicked == 'CNPJ') {
+                    $('#nuCNPJ').attr('style', 'display: show');
+                    $('#nuCPF').attr('style', 'display: none');
+                    $('#nuCPF').val('');
+
+                } else {
+                    $('#nuCPF').attr('style', 'display: show');
+                    $('#nuCNPJ').attr('style', 'display: none');
+                    $('#nuCNPJ').val('');
+                }
+
+            });
+
+            if ($('#nuCNPJ').val() != '') {
+                $('#CNPJ').parent('[name=radioCNPJCPF]').trigger('click');
+            }
+            if ($('#nuCPF').val() != '') {
+                $('#CPF').parent('[name=radioCNPJCPF]').trigger('click');
+            }
+
+        })
+    </script>
+}

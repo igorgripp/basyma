@@ -1,0 +1,58 @@
+﻿@model IEnumerable<NFB2TEntity.Usuario>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.codUsuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dcNome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dcLogin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dcSenha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dcEmail)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.codUsuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dcNome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dcLogin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dcSenha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dcEmail)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

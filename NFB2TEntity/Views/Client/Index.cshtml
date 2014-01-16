@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "NFB2T - Cliente";
+    Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
+}
+
+<button type="button" class="btn btn-default">
+    <span class="glyphicon glyphicon-search"></span> @Html.ActionLink("Pesquisar Cliente", "Search", "Client")
+</button>
+<button type="button" class="btn btn-default">
+    <span class="glyphicon glyphicon-plus"></span> @Html.ActionLink("Adicionar Cliente", "Create", "Client")
+</button>

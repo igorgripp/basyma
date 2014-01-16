@@ -1,0 +1,13 @@
+﻿@model NFB2TEntity.tblUF
+
+@*<select id="codUF" class="selectpicker" name="States">
+    <option value="">Selecione a UF</option>
+    @foreach (var State in @Model.getAllStates())
+    {
+        <option value="@State.codUF">@State.sgUF</option>
+    }
+</select>*@
+<div class="col-sm-4">
+    @Html.DropDownList("codUF", new SelectList(ViewBag.States, "codUF", "sgUF"), "Selecione a UF", new { @class = "selectpicker", id = "codUF" })
+</div>
+

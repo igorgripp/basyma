@@ -1,0 +1,696 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbNF_B2TModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="dbNF_B2TModelStoreContainer">
+          <EntitySet Name="tblCidade" EntityType="dbNF_B2TModel.Store.tblCidade" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tblCliente" EntityType="dbNF_B2TModel.Store.tblCliente" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tblDescricaoNota" EntityType="dbNF_B2TModel.Store.tblDescricaoNota" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tblInformacaoBancaria" EntityType="dbNF_B2TModel.Store.tblInformacaoBancaria" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tblNotaFiscal" EntityType="dbNF_B2TModel.Store.tblNotaFiscal" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tblNotaFiscal_Retencao" EntityType="dbNF_B2TModel.Store.tblNotaFiscal_Retencao" store:Type="Tables" store:Schema="dbo" store:Name="tblNotaFiscal_Retencao">
+            <DefiningQuery>SELECT 
+      [tblNotaFiscal_Retencao].[codNnotaFiscal] AS [codNnotaFiscal], 
+      [tblNotaFiscal_Retencao].[codRetencao] AS [codRetencao], 
+      [tblNotaFiscal_Retencao].[vlAliquota] AS [vlAliquota]
+      FROM [dbo].[tblNotaFiscal_Retencao] AS [tblNotaFiscal_Retencao]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblRetencao" EntityType="dbNF_B2TModel.Store.tblRetencao" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tblTipoNota" EntityType="dbNF_B2TModel.Store.tblTipoNota" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tblUF" EntityType="dbNF_B2TModel.Store.tblUF" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tblUsuario" EntityType="dbNF_B2TModel.Store.tblUsuario" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="fk_cidade_cliente" Association="dbNF_B2TModel.Store.fk_cidade_cliente">
+            <End Role="tblCidade" EntitySet="tblCidade" />
+            <End Role="tblCliente" EntitySet="tblCliente" />
+          </AssociationSet>
+          <AssociationSet Name="fk_cliente_notafiscal" Association="dbNF_B2TModel.Store.fk_cliente_notafiscal">
+            <End Role="tblCliente" EntitySet="tblCliente" />
+            <End Role="tblNotaFiscal" EntitySet="tblNotaFiscal" />
+          </AssociationSet>
+          <AssociationSet Name="fk_informacaobancaria_notafiscal" Association="dbNF_B2TModel.Store.fk_informacaobancaria_notafiscal">
+            <End Role="tblInformacaoBancaria" EntitySet="tblInformacaoBancaria" />
+            <End Role="tblNotaFiscal" EntitySet="tblNotaFiscal" />
+          </AssociationSet>
+          <AssociationSet Name="fk_notafiscal_descricaonota" Association="dbNF_B2TModel.Store.fk_notafiscal_descricaonota">
+            <End Role="tblNotaFiscal" EntitySet="tblNotaFiscal" />
+            <End Role="tblDescricaoNota" EntitySet="tblDescricaoNota" />
+          </AssociationSet>
+          <AssociationSet Name="fk_notafiscal_notafiscal_retencao" Association="dbNF_B2TModel.Store.fk_notafiscal_notafiscal_retencao">
+            <End Role="tblNotaFiscal" EntitySet="tblNotaFiscal" />
+            <End Role="tblNotaFiscal_Retencao" EntitySet="tblNotaFiscal_Retencao" />
+          </AssociationSet>
+          <AssociationSet Name="fk_retencao_notafiscal_retencao" Association="dbNF_B2TModel.Store.fk_retencao_notafiscal_retencao">
+            <End Role="tblRetencao" EntitySet="tblRetencao" />
+            <End Role="tblNotaFiscal_Retencao" EntitySet="tblNotaFiscal_Retencao" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tipoconta_notafiscal" Association="dbNF_B2TModel.Store.fk_tipoconta_notafiscal">
+            <End Role="tblTipoNota" EntitySet="tblTipoNota" />
+            <End Role="tblNotaFiscal" EntitySet="tblNotaFiscal" />
+          </AssociationSet>
+          <AssociationSet Name="fk_uf_cidade" Association="dbNF_B2TModel.Store.fk_uf_cidade">
+            <End Role="tblUF" EntitySet="tblUF" />
+            <End Role="tblCidade" EntitySet="tblCidade" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_notafiscal" Association="dbNF_B2TModel.Store.fk_usuario_notafiscal">
+            <End Role="tblUsuario" EntitySet="tblUsuario" />
+            <End Role="tblNotaFiscal" EntitySet="tblNotaFiscal" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tblCidade">
+          <Key>
+            <PropertyRef Name="codCidade" />
+          </Key>
+          <Property Name="codCidade" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="codUF" Type="int" Nullable="false" />
+          <Property Name="noCidade" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tblCliente">
+          <Key>
+            <PropertyRef Name="codCliente" />
+          </Key>
+          <Property Name="codCliente" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="codCidade" Type="int" Nullable="false" />
+          <Property Name="dcDestinatario" Type="varchar" Nullable="false" MaxLength="1000" />
+          <Property Name="nuCNPJ" Type="varchar" MaxLength="50" />
+          <Property Name="nuCPF" Type="varchar" MaxLength="50" />
+          <Property Name="nuCadastroFiscal" Type="varchar" MaxLength="50" />
+          <Property Name="nuTelefone" Type="varchar" MaxLength="30" />
+          <Property Name="dcEndereco" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="nuCEP" Type="varchar" MaxLength="50" />
+          <Property Name="dcEmail" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblDescricaoNota">
+          <Key>
+            <PropertyRef Name="codDescricaoNota" />
+          </Key>
+          <Property Name="codDescricaoNota" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="codNotaFiscal" Type="int" Nullable="false" />
+          <Property Name="dcDetalheNota" Type="varchar" Nullable="false" MaxLength="300" />
+          <Property Name="nuQuantidade" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblInformacaoBancaria">
+          <Key>
+            <PropertyRef Name="codInformacaoBancaria" />
+          </Key>
+          <Property Name="codInformacaoBancaria" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="nuBanco" Type="int" Nullable="false" />
+          <Property Name="noBanco" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="nuAgencia" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="nuContaCorrente" Type="varchar" Nullable="false" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="tblNotaFiscal">
+          <Key>
+            <PropertyRef Name="codNotaFiscal" />
+          </Key>
+          <Property Name="codNotaFiscal" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="codCliente" Type="int" Nullable="false" />
+          <Property Name="codTipoConta" Type="int" Nullable="false" />
+          <Property Name="codInformacaoBancaria" Type="int" Nullable="false" />
+          <Property Name="codUsuario" Type="int" Nullable="false" />
+          <Property Name="vlUnitario" Type="money" Nullable="false" />
+          <Property Name="vlTotal" Type="money" Nullable="false" />
+          <Property Name="vlDeducaoLegal" Type="money" Nullable="false" />
+          <Property Name="dtEmissao" Type="date" Nullable="false" />
+          <Property Name="vlBaseCalculoISS" Type="numeric" Precision="3" Scale="2" />
+          <Property Name="vlISS" Type="numeric" Precision="3" Scale="2" />
+          <Property Name="dcInformacaoComplementar" Type="varchar" MaxLength="100" />
+          <Property Name="nuControleFormulario" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'dbNF_B2T.dbo.tblNotaFiscal_Retencao' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="tblNotaFiscal_Retencao">
+          <Key>
+            <PropertyRef Name="codNnotaFiscal" />
+            <PropertyRef Name="codRetencao" />
+            <PropertyRef Name="vlAliquota" />
+          </Key>
+          <Property Name="codNnotaFiscal" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="codRetencao" Type="int" Nullable="false" />
+          <Property Name="vlAliquota" Type="numeric" Nullable="false" Precision="3" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblRetencao">
+          <Key>
+            <PropertyRef Name="codRetencao" />
+          </Key>
+          <Property Name="codRetencao" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="dcRetencao" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="sgRetencao" Type="varchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tblTipoNota">
+          <Key>
+            <PropertyRef Name="codTipoNota" />
+          </Key>
+          <Property Name="codTipoNota" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="noTipoNota" Type="varchar" Nullable="false" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="tblUF">
+          <Key>
+            <PropertyRef Name="codUF" />
+          </Key>
+          <Property Name="codUF" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="dcUF" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="sgUF" Type="char" Nullable="false" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="tblUsuario">
+          <Key>
+            <PropertyRef Name="codUsuario" />
+          </Key>
+          <Property Name="codUsuario" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="noUsuario" Type="varchar" Nullable="false" MaxLength="150" />
+          <Property Name="dcLogin" Type="varchar" MaxLength="30" />
+          <Property Name="dcSenha" Type="varchar" MaxLength="40" />
+          <Property Name="dcEmail" Type="varchar" Nullable="false" MaxLength="300" />
+        </EntityType>
+        <Association Name="fk_cidade_cliente">
+          <End Role="tblCidade" Type="dbNF_B2TModel.Store.tblCidade" Multiplicity="1" />
+          <End Role="tblCliente" Type="dbNF_B2TModel.Store.tblCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCidade">
+              <PropertyRef Name="codCidade" />
+            </Principal>
+            <Dependent Role="tblCliente">
+              <PropertyRef Name="codCidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_cliente_notafiscal">
+          <End Role="tblCliente" Type="dbNF_B2TModel.Store.tblCliente" Multiplicity="1" />
+          <End Role="tblNotaFiscal" Type="dbNF_B2TModel.Store.tblNotaFiscal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCliente">
+              <PropertyRef Name="codCliente" />
+            </Principal>
+            <Dependent Role="tblNotaFiscal">
+              <PropertyRef Name="codCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_informacaobancaria_notafiscal">
+          <End Role="tblInformacaoBancaria" Type="dbNF_B2TModel.Store.tblInformacaoBancaria" Multiplicity="1" />
+          <End Role="tblNotaFiscal" Type="dbNF_B2TModel.Store.tblNotaFiscal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblInformacaoBancaria">
+              <PropertyRef Name="codInformacaoBancaria" />
+            </Principal>
+            <Dependent Role="tblNotaFiscal">
+              <PropertyRef Name="codInformacaoBancaria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_notafiscal_descricaonota">
+          <End Role="tblNotaFiscal" Type="dbNF_B2TModel.Store.tblNotaFiscal" Multiplicity="1" />
+          <End Role="tblDescricaoNota" Type="dbNF_B2TModel.Store.tblDescricaoNota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblNotaFiscal">
+              <PropertyRef Name="codNotaFiscal" />
+            </Principal>
+            <Dependent Role="tblDescricaoNota">
+              <PropertyRef Name="codNotaFiscal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_notafiscal_notafiscal_retencao">
+          <End Role="tblNotaFiscal" Type="dbNF_B2TModel.Store.tblNotaFiscal" Multiplicity="1" />
+          <End Role="tblNotaFiscal_Retencao" Type="dbNF_B2TModel.Store.tblNotaFiscal_Retencao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblNotaFiscal">
+              <PropertyRef Name="codNotaFiscal" />
+            </Principal>
+            <Dependent Role="tblNotaFiscal_Retencao">
+              <PropertyRef Name="codNnotaFiscal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_retencao_notafiscal_retencao">
+          <End Role="tblRetencao" Type="dbNF_B2TModel.Store.tblRetencao" Multiplicity="1" />
+          <End Role="tblNotaFiscal_Retencao" Type="dbNF_B2TModel.Store.tblNotaFiscal_Retencao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRetencao">
+              <PropertyRef Name="codRetencao" />
+            </Principal>
+            <Dependent Role="tblNotaFiscal_Retencao">
+              <PropertyRef Name="codRetencao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tipoconta_notafiscal">
+          <End Role="tblTipoNota" Type="dbNF_B2TModel.Store.tblTipoNota" Multiplicity="1" />
+          <End Role="tblNotaFiscal" Type="dbNF_B2TModel.Store.tblNotaFiscal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTipoNota">
+              <PropertyRef Name="codTipoNota" />
+            </Principal>
+            <Dependent Role="tblNotaFiscal">
+              <PropertyRef Name="codTipoConta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_uf_cidade">
+          <End Role="tblUF" Type="dbNF_B2TModel.Store.tblUF" Multiplicity="1" />
+          <End Role="tblCidade" Type="dbNF_B2TModel.Store.tblCidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUF">
+              <PropertyRef Name="codUF" />
+            </Principal>
+            <Dependent Role="tblCidade">
+              <PropertyRef Name="codUF" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_notafiscal">
+          <End Role="tblUsuario" Type="dbNF_B2TModel.Store.tblUsuario" Multiplicity="1" />
+          <End Role="tblNotaFiscal" Type="dbNF_B2TModel.Store.tblNotaFiscal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsuario">
+              <PropertyRef Name="codUsuario" />
+            </Principal>
+            <Dependent Role="tblNotaFiscal">
+              <PropertyRef Name="codUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbNF_B2TModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dbNF_B2TEntity" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="tblCidades" EntityType="dbNF_B2TModel.tblCidade" />
+          <EntitySet Name="tblClientes" EntityType="dbNF_B2TModel.tblCliente" />
+          <EntitySet Name="tblDescricaoNotas" EntityType="dbNF_B2TModel.tblDescricaoNota" />
+          <EntitySet Name="tblInformacaoBancarias" EntityType="dbNF_B2TModel.tblInformacaoBancaria" />
+          <EntitySet Name="tblNotaFiscals" EntityType="dbNF_B2TModel.tblNotaFiscal" />
+          <EntitySet Name="tblNotaFiscal_Retencao" EntityType="dbNF_B2TModel.tblNotaFiscal_Retencao" />
+          <EntitySet Name="tblRetencaos" EntityType="dbNF_B2TModel.tblRetencao" />
+          <EntitySet Name="tblTipoNotas" EntityType="dbNF_B2TModel.tblTipoNota" />
+          <EntitySet Name="tblUFs" EntityType="dbNF_B2TModel.tblUF" />
+          <EntitySet Name="tblUsuarios" EntityType="dbNF_B2TModel.tblUsuario" />
+          <AssociationSet Name="fk_cidade_cliente" Association="dbNF_B2TModel.fk_cidade_cliente">
+            <End Role="tblCidade" EntitySet="tblCidades" />
+            <End Role="tblCliente" EntitySet="tblClientes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_uf_cidade" Association="dbNF_B2TModel.fk_uf_cidade">
+            <End Role="tblUF" EntitySet="tblUFs" />
+            <End Role="tblCidade" EntitySet="tblCidades" />
+          </AssociationSet>
+          <AssociationSet Name="fk_cliente_notafiscal" Association="dbNF_B2TModel.fk_cliente_notafiscal">
+            <End Role="tblCliente" EntitySet="tblClientes" />
+            <End Role="tblNotaFiscal" EntitySet="tblNotaFiscals" />
+          </AssociationSet>
+          <AssociationSet Name="fk_notafiscal_descricaonota" Association="dbNF_B2TModel.fk_notafiscal_descricaonota">
+            <End Role="tblNotaFiscal" EntitySet="tblNotaFiscals" />
+            <End Role="tblDescricaoNota" EntitySet="tblDescricaoNotas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_informacaobancaria_notafiscal" Association="dbNF_B2TModel.fk_informacaobancaria_notafiscal">
+            <End Role="tblInformacaoBancaria" EntitySet="tblInformacaoBancarias" />
+            <End Role="tblNotaFiscal" EntitySet="tblNotaFiscals" />
+          </AssociationSet>
+          <AssociationSet Name="fk_notafiscal_notafiscal_retencao" Association="dbNF_B2TModel.fk_notafiscal_notafiscal_retencao">
+            <End Role="tblNotaFiscal" EntitySet="tblNotaFiscals" />
+            <End Role="tblNotaFiscal_Retencao" EntitySet="tblNotaFiscal_Retencao" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tipoconta_notafiscal" Association="dbNF_B2TModel.fk_tipoconta_notafiscal">
+            <End Role="tblTipoNota" EntitySet="tblTipoNotas" />
+            <End Role="tblNotaFiscal" EntitySet="tblNotaFiscals" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_notafiscal" Association="dbNF_B2TModel.fk_usuario_notafiscal">
+            <End Role="tblUsuario" EntitySet="tblUsuarios" />
+            <End Role="tblNotaFiscal" EntitySet="tblNotaFiscals" />
+          </AssociationSet>
+          <AssociationSet Name="fk_retencao_notafiscal_retencao" Association="dbNF_B2TModel.fk_retencao_notafiscal_retencao">
+            <End Role="tblRetencao" EntitySet="tblRetencaos" />
+            <End Role="tblNotaFiscal_Retencao" EntitySet="tblNotaFiscal_Retencao" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tblCidade">
+          <Key>
+            <PropertyRef Name="codCidade" />
+          </Key>
+          <Property Type="Int32" Name="codCidade" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="codUF" Nullable="false" />
+          <Property Type="String" Name="noCidade" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblClientes" Relationship="dbNF_B2TModel.fk_cidade_cliente" FromRole="tblCidade" ToRole="tblCliente" />
+          <NavigationProperty Name="tblUF" Relationship="dbNF_B2TModel.fk_uf_cidade" FromRole="tblCidade" ToRole="tblUF" />
+        </EntityType>
+        <EntityType Name="tblCliente">
+          <Key>
+            <PropertyRef Name="codCliente" />
+          </Key>
+          <Property Type="Int32" Name="codCliente" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="codCidade" Nullable="false" />
+          <Property Type="String" Name="dcDestinatario" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="nuCNPJ" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="nuCPF" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="nuCadastroFiscal" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="nuTelefone" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="dcEndereco" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="nuCEP" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="dcEmail" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblCidade" Relationship="dbNF_B2TModel.fk_cidade_cliente" FromRole="tblCliente" ToRole="tblCidade" />
+          <NavigationProperty Name="tblNotaFiscals" Relationship="dbNF_B2TModel.fk_cliente_notafiscal" FromRole="tblCliente" ToRole="tblNotaFiscal" />
+        </EntityType>
+        <EntityType Name="tblDescricaoNota">
+          <Key>
+            <PropertyRef Name="codDescricaoNota" />
+          </Key>
+          <Property Type="Int32" Name="codDescricaoNota" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="codNotaFiscal" Nullable="false" />
+          <Property Type="String" Name="dcDetalheNota" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="nuQuantidade" Nullable="false" />
+          <NavigationProperty Name="tblNotaFiscal" Relationship="dbNF_B2TModel.fk_notafiscal_descricaonota" FromRole="tblDescricaoNota" ToRole="tblNotaFiscal" />
+        </EntityType>
+        <EntityType Name="tblInformacaoBancaria">
+          <Key>
+            <PropertyRef Name="codInformacaoBancaria" />
+          </Key>
+          <Property Type="Int32" Name="codInformacaoBancaria" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="nuBanco" Nullable="false" />
+          <Property Type="String" Name="noBanco" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="nuAgencia" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="nuContaCorrente" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblNotaFiscals" Relationship="dbNF_B2TModel.fk_informacaobancaria_notafiscal" FromRole="tblInformacaoBancaria" ToRole="tblNotaFiscal" />
+        </EntityType>
+        <EntityType Name="tblNotaFiscal">
+          <Key>
+            <PropertyRef Name="codNotaFiscal" />
+          </Key>
+          <Property Type="Int32" Name="codNotaFiscal" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="codCliente" Nullable="false" />
+          <Property Type="Int32" Name="codTipoConta" Nullable="false" />
+          <Property Type="Int32" Name="codInformacaoBancaria" Nullable="false" />
+          <Property Type="Int32" Name="codUsuario" Nullable="false" />
+          <Property Type="Decimal" Name="vlUnitario" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="vlTotal" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="vlDeducaoLegal" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="DateTime" Name="dtEmissao" Nullable="false" Precision="0" />
+          <Property Type="Decimal" Name="vlBaseCalculoISS" Precision="3" Scale="2" />
+          <Property Type="Decimal" Name="vlISS" Precision="3" Scale="2" />
+          <Property Type="String" Name="dcInformacaoComplementar" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="nuControleFormulario" />
+          <NavigationProperty Name="tblCliente" Relationship="dbNF_B2TModel.fk_cliente_notafiscal" FromRole="tblNotaFiscal" ToRole="tblCliente" />
+          <NavigationProperty Name="tblDescricaoNotas" Relationship="dbNF_B2TModel.fk_notafiscal_descricaonota" FromRole="tblNotaFiscal" ToRole="tblDescricaoNota" />
+          <NavigationProperty Name="tblInformacaoBancaria" Relationship="dbNF_B2TModel.fk_informacaobancaria_notafiscal" FromRole="tblNotaFiscal" ToRole="tblInformacaoBancaria" />
+          <NavigationProperty Name="tblNotaFiscal_Retencao" Relationship="dbNF_B2TModel.fk_notafiscal_notafiscal_retencao" FromRole="tblNotaFiscal" ToRole="tblNotaFiscal_Retencao" />
+          <NavigationProperty Name="tblTipoNota" Relationship="dbNF_B2TModel.fk_tipoconta_notafiscal" FromRole="tblNotaFiscal" ToRole="tblTipoNota" />
+          <NavigationProperty Name="tblUsuario" Relationship="dbNF_B2TModel.fk_usuario_notafiscal" FromRole="tblNotaFiscal" ToRole="tblUsuario" />
+        </EntityType>
+        <EntityType Name="tblNotaFiscal_Retencao">
+          <Key>
+            <PropertyRef Name="codNnotaFiscal" />
+            <PropertyRef Name="codRetencao" />
+            <PropertyRef Name="vlAliquota" />
+          </Key>
+          <Property Type="Int32" Name="codNnotaFiscal" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="codRetencao" Nullable="false" />
+          <Property Type="Decimal" Name="vlAliquota" Nullable="false" Precision="3" Scale="2" />
+          <NavigationProperty Name="tblNotaFiscal" Relationship="dbNF_B2TModel.fk_notafiscal_notafiscal_retencao" FromRole="tblNotaFiscal_Retencao" ToRole="tblNotaFiscal" />
+          <NavigationProperty Name="tblRetencao" Relationship="dbNF_B2TModel.fk_retencao_notafiscal_retencao" FromRole="tblNotaFiscal_Retencao" ToRole="tblRetencao" />
+        </EntityType>
+        <EntityType Name="tblRetencao">
+          <Key>
+            <PropertyRef Name="codRetencao" />
+          </Key>
+          <Property Type="Int32" Name="codRetencao" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="dcRetencao" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="sgRetencao" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblNotaFiscal_Retencao" Relationship="dbNF_B2TModel.fk_retencao_notafiscal_retencao" FromRole="tblRetencao" ToRole="tblNotaFiscal_Retencao" />
+        </EntityType>
+        <EntityType Name="tblTipoNota">
+          <Key>
+            <PropertyRef Name="codTipoNota" />
+          </Key>
+          <Property Type="Int32" Name="codTipoNota" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="noTipoNota" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblNotaFiscals" Relationship="dbNF_B2TModel.fk_tipoconta_notafiscal" FromRole="tblTipoNota" ToRole="tblNotaFiscal" />
+        </EntityType>
+        <EntityType Name="tblUF">
+          <Key>
+            <PropertyRef Name="codUF" />
+          </Key>
+          <Property Type="Int32" Name="codUF" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="dcUF" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="sgUF" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tblCidades" Relationship="dbNF_B2TModel.fk_uf_cidade" FromRole="tblUF" ToRole="tblCidade" />
+        </EntityType>
+        <EntityType Name="tblUsuario">
+          <Key>
+            <PropertyRef Name="codUsuario" />
+          </Key>
+          <Property Type="Int32" Name="codUsuario" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="noUsuario" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="dcLogin" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="dcSenha" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="dcEmail" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblNotaFiscals" Relationship="dbNF_B2TModel.fk_usuario_notafiscal" FromRole="tblUsuario" ToRole="tblNotaFiscal" />
+        </EntityType>
+        <Association Name="fk_cidade_cliente">
+          <End Type="dbNF_B2TModel.tblCidade" Role="tblCidade" Multiplicity="1" />
+          <End Type="dbNF_B2TModel.tblCliente" Role="tblCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCidade">
+              <PropertyRef Name="codCidade" />
+            </Principal>
+            <Dependent Role="tblCliente">
+              <PropertyRef Name="codCidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_uf_cidade">
+          <End Type="dbNF_B2TModel.tblUF" Role="tblUF" Multiplicity="1" />
+          <End Type="dbNF_B2TModel.tblCidade" Role="tblCidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUF">
+              <PropertyRef Name="codUF" />
+            </Principal>
+            <Dependent Role="tblCidade">
+              <PropertyRef Name="codUF" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_cliente_notafiscal">
+          <End Type="dbNF_B2TModel.tblCliente" Role="tblCliente" Multiplicity="1" />
+          <End Type="dbNF_B2TModel.tblNotaFiscal" Role="tblNotaFiscal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCliente">
+              <PropertyRef Name="codCliente" />
+            </Principal>
+            <Dependent Role="tblNotaFiscal">
+              <PropertyRef Name="codCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_notafiscal_descricaonota">
+          <End Type="dbNF_B2TModel.tblNotaFiscal" Role="tblNotaFiscal" Multiplicity="1" />
+          <End Type="dbNF_B2TModel.tblDescricaoNota" Role="tblDescricaoNota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblNotaFiscal">
+              <PropertyRef Name="codNotaFiscal" />
+            </Principal>
+            <Dependent Role="tblDescricaoNota">
+              <PropertyRef Name="codNotaFiscal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_informacaobancaria_notafiscal">
+          <End Type="dbNF_B2TModel.tblInformacaoBancaria" Role="tblInformacaoBancaria" Multiplicity="1" />
+          <End Type="dbNF_B2TModel.tblNotaFiscal" Role="tblNotaFiscal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblInformacaoBancaria">
+              <PropertyRef Name="codInformacaoBancaria" />
+            </Principal>
+            <Dependent Role="tblNotaFiscal">
+              <PropertyRef Name="codInformacaoBancaria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_notafiscal_notafiscal_retencao">
+          <End Type="dbNF_B2TModel.tblNotaFiscal" Role="tblNotaFiscal" Multiplicity="1" />
+          <End Type="dbNF_B2TModel.tblNotaFiscal_Retencao" Role="tblNotaFiscal_Retencao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblNotaFiscal">
+              <PropertyRef Name="codNotaFiscal" />
+            </Principal>
+            <Dependent Role="tblNotaFiscal_Retencao">
+              <PropertyRef Name="codNnotaFiscal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tipoconta_notafiscal">
+          <End Type="dbNF_B2TModel.tblTipoNota" Role="tblTipoNota" Multiplicity="1" />
+          <End Type="dbNF_B2TModel.tblNotaFiscal" Role="tblNotaFiscal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTipoNota">
+              <PropertyRef Name="codTipoNota" />
+            </Principal>
+            <Dependent Role="tblNotaFiscal">
+              <PropertyRef Name="codTipoConta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_notafiscal">
+          <End Type="dbNF_B2TModel.tblUsuario" Role="tblUsuario" Multiplicity="1" />
+          <End Type="dbNF_B2TModel.tblNotaFiscal" Role="tblNotaFiscal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsuario">
+              <PropertyRef Name="codUsuario" />
+            </Principal>
+            <Dependent Role="tblNotaFiscal">
+              <PropertyRef Name="codUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_retencao_notafiscal_retencao">
+          <End Type="dbNF_B2TModel.tblRetencao" Role="tblRetencao" Multiplicity="1" />
+          <End Type="dbNF_B2TModel.tblNotaFiscal_Retencao" Role="tblNotaFiscal_Retencao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRetencao">
+              <PropertyRef Name="codRetencao" />
+            </Principal>
+            <Dependent Role="tblNotaFiscal_Retencao">
+              <PropertyRef Name="codRetencao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbNF_B2TModelStoreContainer" CdmEntityContainer="dbNF_B2TEntity">
+          <EntitySetMapping Name="tblCidades">
+            <EntityTypeMapping TypeName="dbNF_B2TModel.tblCidade">
+              <MappingFragment StoreEntitySet="tblCidade">
+                <ScalarProperty Name="noCidade" ColumnName="noCidade" />
+                <ScalarProperty Name="codUF" ColumnName="codUF" />
+                <ScalarProperty Name="codCidade" ColumnName="codCidade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblClientes">
+            <EntityTypeMapping TypeName="dbNF_B2TModel.tblCliente">
+              <MappingFragment StoreEntitySet="tblCliente">
+                <ScalarProperty Name="dcEmail" ColumnName="dcEmail" />
+                <ScalarProperty Name="nuCEP" ColumnName="nuCEP" />
+                <ScalarProperty Name="dcEndereco" ColumnName="dcEndereco" />
+                <ScalarProperty Name="nuTelefone" ColumnName="nuTelefone" />
+                <ScalarProperty Name="nuCadastroFiscal" ColumnName="nuCadastroFiscal" />
+                <ScalarProperty Name="nuCPF" ColumnName="nuCPF" />
+                <ScalarProperty Name="nuCNPJ" ColumnName="nuCNPJ" />
+                <ScalarProperty Name="dcDestinatario" ColumnName="dcDestinatario" />
+                <ScalarProperty Name="codCidade" ColumnName="codCidade" />
+                <ScalarProperty Name="codCliente" ColumnName="codCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDescricaoNotas">
+            <EntityTypeMapping TypeName="dbNF_B2TModel.tblDescricaoNota">
+              <MappingFragment StoreEntitySet="tblDescricaoNota">
+                <ScalarProperty Name="nuQuantidade" ColumnName="nuQuantidade" />
+                <ScalarProperty Name="dcDetalheNota" ColumnName="dcDetalheNota" />
+                <ScalarProperty Name="codNotaFiscal" ColumnName="codNotaFiscal" />
+                <ScalarProperty Name="codDescricaoNota" ColumnName="codDescricaoNota" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblInformacaoBancarias">
+            <EntityTypeMapping TypeName="dbNF_B2TModel.tblInformacaoBancaria">
+              <MappingFragment StoreEntitySet="tblInformacaoBancaria">
+                <ScalarProperty Name="nuContaCorrente" ColumnName="nuContaCorrente" />
+                <ScalarProperty Name="nuAgencia" ColumnName="nuAgencia" />
+                <ScalarProperty Name="noBanco" ColumnName="noBanco" />
+                <ScalarProperty Name="nuBanco" ColumnName="nuBanco" />
+                <ScalarProperty Name="codInformacaoBancaria" ColumnName="codInformacaoBancaria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblNotaFiscals">
+            <EntityTypeMapping TypeName="dbNF_B2TModel.tblNotaFiscal">
+              <MappingFragment StoreEntitySet="tblNotaFiscal">
+                <ScalarProperty Name="nuControleFormulario" ColumnName="nuControleFormulario" />
+                <ScalarProperty Name="dcInformacaoComplementar" ColumnName="dcInformacaoComplementar" />
+                <ScalarProperty Name="vlISS" ColumnName="vlISS" />
+                <ScalarProperty Name="vlBaseCalculoISS" ColumnName="vlBaseCalculoISS" />
+                <ScalarProperty Name="dtEmissao" ColumnName="dtEmissao" />
+                <ScalarProperty Name="vlDeducaoLegal" ColumnName="vlDeducaoLegal" />
+                <ScalarProperty Name="vlTotal" ColumnName="vlTotal" />
+                <ScalarProperty Name="vlUnitario" ColumnName="vlUnitario" />
+                <ScalarProperty Name="codUsuario" ColumnName="codUsuario" />
+                <ScalarProperty Name="codInformacaoBancaria" ColumnName="codInformacaoBancaria" />
+                <ScalarProperty Name="codTipoConta" ColumnName="codTipoConta" />
+                <ScalarProperty Name="codCliente" ColumnName="codCliente" />
+                <ScalarProperty Name="codNotaFiscal" ColumnName="codNotaFiscal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblNotaFiscal_Retencao">
+            <EntityTypeMapping TypeName="dbNF_B2TModel.tblNotaFiscal_Retencao">
+              <MappingFragment StoreEntitySet="tblNotaFiscal_Retencao">
+                <ScalarProperty Name="vlAliquota" ColumnName="vlAliquota" />
+                <ScalarProperty Name="codRetencao" ColumnName="codRetencao" />
+                <ScalarProperty Name="codNnotaFiscal" ColumnName="codNnotaFiscal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRetencaos">
+            <EntityTypeMapping TypeName="dbNF_B2TModel.tblRetencao">
+              <MappingFragment StoreEntitySet="tblRetencao">
+                <ScalarProperty Name="sgRetencao" ColumnName="sgRetencao" />
+                <ScalarProperty Name="dcRetencao" ColumnName="dcRetencao" />
+                <ScalarProperty Name="codRetencao" ColumnName="codRetencao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTipoNotas">
+            <EntityTypeMapping TypeName="dbNF_B2TModel.tblTipoNota">
+              <MappingFragment StoreEntitySet="tblTipoNota">
+                <ScalarProperty Name="noTipoNota" ColumnName="noTipoNota" />
+                <ScalarProperty Name="codTipoNota" ColumnName="codTipoNota" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUFs">
+            <EntityTypeMapping TypeName="dbNF_B2TModel.tblUF">
+              <MappingFragment StoreEntitySet="tblUF">
+                <ScalarProperty Name="sgUF" ColumnName="sgUF" />
+                <ScalarProperty Name="dcUF" ColumnName="dcUF" />
+                <ScalarProperty Name="codUF" ColumnName="codUF" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsuarios">
+            <EntityTypeMapping TypeName="dbNF_B2TModel.tblUsuario">
+              <MappingFragment StoreEntitySet="tblUsuario">
+                <ScalarProperty Name="dcEmail" ColumnName="dcEmail" />
+                <ScalarProperty Name="dcSenha" ColumnName="dcSenha" />
+                <ScalarProperty Name="dcLogin" ColumnName="dcLogin" />
+                <ScalarProperty Name="noUsuario" ColumnName="noUsuario" />
+                <ScalarProperty Name="codUsuario" ColumnName="codUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

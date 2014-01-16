@@ -1,0 +1,16 @@
+﻿@model NFB2TEntity.Models.LoginModel
+@using (Html.BeginForm("Login", "User", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+<div class="navbar-form navbar-right" role="form">
+    <div class="form-group">
+        <input type="text" placeholder="Usuário" name="dcLogin" class="form-control">
+    </div>
+    <div class="form-group">
+        <input type="password" placeholder="Senha" name="dcSenha" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-success" value="Log in">OK</button>
+</div>
+}
+

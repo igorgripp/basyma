@@ -1,0 +1,209 @@
+﻿@model NFB2TEntity.Models.ClientModel
+
+@{
+    ViewBag.Title = "Pesquisar Cliente";
+    Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <h3>. Pesquisa <small>(cliente)</small></h3>
+    <br />
+    <br />
+    <div class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="dcDestinatario" class="col-sm-2 control-label">Destinatário</label>
+            <div class="col-sm-7">
+                @Html.TextBoxFor(u => u.dcDestinatario, new { @class = "form-control", placeholder = "Destinatário" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-4">
+                @Html.TextBoxFor(u => u.nuCNPJ, new { @class = "form-control", placeholder = "CNPJ" })
+                @Html.TextBoxFor(u => u.nuCPF, new { @class = "form-control", placeholder = "CPF", style = "display: none" })
+            </div>
+            <div class="col-sm-4 ">
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary active" id="CNPJLabel" name="radioCNPJCPF">
+                        <input type="radio" id="CNPJ" name="CNPJ" checked>
+                        CNPJ
+                    </label>
+                    <label class="btn btn-primary" id="CPFLabel" name="radioCNPJCPF">
+                        <input type="radio" id="CPF" name="CPF">
+                        CPF
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="nuCadastroFiscal" class="col-sm-2 control-label">Cadastro Fiscal</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(u => u.nuCadastroFiscal, new { @class = "form-control", placeholder = "Cadastro Fiscal" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="nuTelefone" class="col-sm-2 control-label">Telefone</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(u => u.nuTelefone, new { @class = "form-control", placeholder = "Telefone" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-4">
+                @Html.Partial("_ComboboxStatePartial", ViewData["State"])
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-4">
+                @Html.Partial("_ComboboxCityPartial", ViewData["City"])
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Pesquisar</button>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_ModalAlertPartial")
+    <br />
+}
+
+@if (ViewBag.ClientList != null)
+{
+    <table class="table table-bordered" id="tableSearch">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>@Html.DisplayNameFor(u => u.dcDestinatario)</th>
+                <th>@Html.DisplayNameFor(u => u.nuCPF)</th>
+                <th>@Html.DisplayNameFor(u => u.nuCNPJ)</th>
+                <th>@Html.DisplayNameFor(u => u.nuTelefone)</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        @foreach (NFB2TEntity.tblCliente client in ViewBag.ClientList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => client.codCliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => client.dcDestinatario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => client.nuCPF)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => client.nuCNPJ)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => client.nuTelefone)
+                </td>
+                <td>
+                    @Html.HiddenFor(modelItem => client.codCliente)
+                    <button class="btn btn-primary btn-sm" data-toggle="modal" name="btnEdit" >
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </button>
+                    <button class="btn btn-primary btn-sm btn-danger" data-toggle="modal" data-target="#modalExcluir" name="btnDelete" >
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                    @*@Html.ActionLink("Editar", "Edit", new { id = client.codCliente }) |
+                    @Html.ActionLink("Excluir", "Delete", new { id = client.codCliente })*@
+                </td>
+            </tr>
+        }
+    </table>
+    <!-- Modal -->
+    <div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Alerta</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="hdnDeleteClient" />
+                    Deseja realmente excluir esse cliente do banco de dados ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default close_button" data-dismiss="modal">Não</button>
+                    <button type="button" class="btn btn-primary action_button">Sim</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+}
+
+@section scripts{
+    <script src="~/Scripts/jquery-select-states-cities.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            $('[name=btnEdit]').click(function (e) {
+                var idClientEdit = $(this).parents('td').children('input').val();
+                window.location = "../Client/Edit/" + idClientEdit;
+
+            });
+
+            $('[name=btnDelete]').click(function (e) {
+                $('#hdnDeleteClient').val($(this).parents('td').children('input').val());
+            });
+
+            $('.action_button').click(function (e) {
+                var idClient = $('#hdnDeleteClient').val();
+                $('#modalExcluir').modal('hide');
+                $.getJSON("/Client/AjaxDeleteClient", { "idClient": idClient }, redirection);
+                
+            });
+
+            redirection = function (url) {
+                if (url.RedirectUrl) {
+                    window.location = url.RedirectUrl;
+                }
+            };
+
+            $('.close_button').click(function (e) {
+                $('#hdnDeleteClient').empty();
+            });
+
+            $('select').selectpicker();
+
+            $("#nuCNPJ").mask("99.999.999/9999-99");
+            $("#nuCPF").mask("999.999.999-99");
+            $("#nuCadastroFiscal").mask("99.999.999/999-99");
+            $("#nuTelefone").mask("(99)9999-9999");
+
+
+            $('[name=radioCNPJCPF]').click(function () {
+                idInputClicked = $(this).children('input').attr('id');
+
+                if (idInputClicked == 'CNPJ') {
+                    $('#nuCNPJ').attr('style', 'display: show');
+                    $('#nuCPF').attr('style', 'display: none');
+                    $('#nuCPF').val('');
+
+                } else {
+                    $('#nuCPF').attr('style', 'display: show');
+                    $('#nuCNPJ').attr('style', 'display: none');
+                    $('#nuCNPJ').val('');
+                }
+
+            })
+
+            if ($('#nuCNPJ').val() != '') {
+                $('#CNPJ').parent('[name=radioCNPJCPF]').trigger('click');
+            }
+            if ($('#nuCPF').val() != '') {
+                $('#CPF').parent('[name=radioCNPJCPF]').trigger('click');
+            }
+
+        })
+    </script>
+}
